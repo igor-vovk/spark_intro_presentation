@@ -1,200 +1,479 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
 
-		<title>Spark Intro</title>
+    <title>Spark Intro</title>
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css" id="theme">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
 
-	<body>
+<body>
 
-		<div class="reveal">
+<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>Apache Spark</h1>
-					<h2>Для новичков от новичков</h2>
-					<p><img src="img/spark-logo.png" style="background: none; border: 0; box-shadow: none;"></p>
-					<p>
-						<small>
-						Игорь Вовк<br>
-						<a href="http://github.com/igorynia">http://github.com/igorynia</a> / <a href="http://facebook.com/igorynia">http://facebook.com/igorynia</a>
-						</small>
-					</p>
-				</section>
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h2>Распределенная обработка данных с использованием Apache Spark</h2>
 
-				<section>
-					<p>API есть для языков Scala, Java, Python</p>
-					<p>Вся робота со Spark сводится к созданию новых RDD, трансформациях над существующими RDD, или вызов операций c RDD для вызова результата</p>
-				</section>
+            <p><img src="img/spark-logo.png" style="background: none; border: 0; box-shadow: none;"></p>
 
-				<section>
-					<h3>Основная структура данных – RDD</h3>
+            <p>
+                <small>
+                    Игорь Вовк<br>
+                    <a href="http://github.com/igorynia">http://github.com/igorynia</a> / <a
+                        href="http://facebook.com/igorynia">http://facebook.com/igorynia</a>
+                </small>
+            </p>
+        </section>
 
-					<p>Расшифровывается как Resilien Distributet Dataset</p>
+        <section>
+            <h3>(Not so) long story</h3>
+            <ul>
+                <li>5 лет в разработке</li>
+                <li>Из них 3 года потрачено на PHP *trollface*</li>
+                <li>Работаю в компании x2sy.com</li>
+                <li>Занимаюсь развитием существующих API</li>
+                <li>Spark использую преимущественно в собственных проектах</li>
+                <li>"На работе" пока Hadoop</li>
+            </ul>
+        </section>
 
-					<p>
-						<ul>
-							<li>иммутабельная коллекция объектов</li>
-							<li>каждый RDD разделен на несколько партишнов</li>
-						</ul>
-					</p>
-				</section>
+        <section>
+            <img src="img/me_php_coder.jpg" style="max-width: 30%;">
 
-				<section>
-					<h3>Создание RDD</h3>
+            <h3>Времена кодинга на PHP</h3>
+        </section>
 
-					<ul>
-						<li>можно загруить внешний датасет</li>
-						<li>на основании коллекции объектов</li>
-					</ul>
+        <section>
+            <h3>Пару слов о Big Data</h3>
 
-					<p>
-						<pre><code data-trim contenteditable>
-val lines = sc.textFile("README.md")
+            <blockquote>
+                "Big data is like teenage sex: everyone talks about it, nobody really knows how to do it,
+                everyone thinks everyone else is doing it, so everyone claims they are doing it..."
+            </blockquote>
+            <p style="text-align: right">
+                <a href="https://www.facebook.com/dan.ariely">Dan Ariely</a>
+            </p>
+        </section>
 
-val lines2 = sc.parallelize(List("pandas", "i like pandas")
-						</code></pre>
-					</p>
-				</section>
+        <section>
+            <img src="img/big_data_frameworks.png" style="max-width: 60%;">
 
-				<section>
-					<p>
-						Можно загружать данные из:
+            <p>github.com/onurakpolat/awesome-bigdata</p>
+        </section>
 
-						<ul>
-							<li>с локальной ФС, NFS, HDFS, Amazon S3 в текстовом формате, JSON, CSV, хадуповские SequenceFiles, сериализованные java-объекты</li>
-							<li>БД, поддерживаются Cassandra, HBASE, Elasticsearch и любую JDBC-совместимую</li>
-						</ul>
-					</p>
-				</section>
+        <section>
+            <h3>Фреймворки</h3>
+            <ul>
+                <li>Hadoop MapReduce</li>
+                <li>Apache Spark</li>
+                <li>Storm</li>
+                <li>Apache Tez</li>
+            </ul>
+        </section>
 
-				<section>
-					<h3>Операции с RDD</h3>
+        <section>
+            <h3>Преимущества Hadoop MapReduce</h3>
 
-					<ul>
-						<li>трансформации - операции над RDD возвращают новый RDD</li>
-						<ul>
-							<li>map</li>
-							<li>filter</li>
-						</ul>
-						<li>действия - возвращают результат в основную програму</li>
-						<ul>
-							<li>count</li>
-							<li>first</li>
-						</ul>
-					</ul>
-				</section>
+            <ul>
+                <li>большое сообщество</li>
+                <li>легче найти квалифицированные кадры, которые работали и разворачивали большие кластеры</li>
+                <li>в некоторых случаях легче интегрировать в существующую инфрастуктуру</li>
+            </ul>
+        </section>
 
-				<section>
-					<h3>Трансформации</h3>
+        <section>
+            <h3>Преимущества Spark</h3>
 
-					<ul>
-						<li>синтаксис похож на работу с коллекциями в Scala</li>
-						<li>все операции lazy</li>
-						<li>производятся только тогда, когда выполняется действие</li>
-						<li>переиспользуемые данные можно заперсистить, вызвав метод .persist()</li>
-					</ul>
-				</section>
+            <blockquote>
+                – Спарк лучше чем Хадуп.
+                - Чем лучше?
+                – Чем Хадуп!
+            </blockquote>
+        </section>
 
-				<section>
-					<h3>Действия</h3>
+        <section>
+            <h3>Преимущества Spark</h3>
 
-					<p>Операции, возвращающие данные в основную програму или записывающие данные во внешнее хранилище</p>
-				</section>
+            <ul>
+                <li>Самый активный open-source проект в области Big Data</li>
+                <li>низкий порог вхождения</li>
+                <li>перфоманс</li>
+                <ul>
+                    <li>кэширование</li>
+                    <li>ленивое выполнение</li>
+                </ul>
+                <li>простота в развертывании</li>
+            </ul>
+        </section>
 
-				<section>
-					<h2>Экосистема</h2>
+        <!--<section>-->
+            <!--<h3>Философия</h3>-->
 
-					<img src="img/Spark_Ecosystem_Chart11.jpg">
-				</section>
+            <!--<ul>-->
+                <!--<li>Предметно-ориентированные бибилотеки</li>-->
+                <!--<li>Делать жизнь разработчиков легче</li>-->
+                <!--<li>Легкая интеграция с существующими сторейджами</li>-->
+                <!--<li>...</li>-->
+            <!--</ul>-->
+        <!--</section>-->
 
-				<section>
-					<h3>Spark Streaming</h3>
+        <section>
+            <img src="img/top_contributors.png" style="max-width: 70%"/>
+        </section>
 
-					<p>Если нужно анализировать не только собранные данные, но и потоки c новыми данными в реалтайме.</p>
-					<p>Можно подключиться к HDFS, Flume, Kafka</p>
-				</section>
+        <section>
+            <img src="img/top_scala_repos.png" style="max-width: 70%">
+        </section>
 
-				<section>
-					<h3>Spark SQL</h3>
+        <section>
+            <h3>Экосистема</h3>
 
-					<p>Можно выполнять SQL-запросы к данным Apache Hive, пишут что up to x100 раз быстрее чем Hive</p>
-				</section>
+            <img src="img/spark_ecosystem.svg" style="border: 0; width: 60%;" />
+        </section>
 
-				<section>
-					<h3>GraphX</h3>
+        <section>
+            <h3>Легкость в использовании</h3>
 
-					<p>Работа с графами</p>
-				</section>
+            <ul>
+                <li>Кода реально меньше в сравнении с hadoop</li>
+                <li>Можно использовать Scala, Java и Python</li>
+                <li>80+ высокоуровневых функций</li>
+            </ul>
+        </section>
 
-				<section>
-					<h2>Что почитать</h2>
-					<ul>
-						<li><i>Документация</i> <a href="https://spark.apache.org/documentation.html">https://spark.apache.org/documentation.html</a></li>
-						<li><i>Learning Spark: Lightning-Fast Big Data Analysis</i> <a href="http://www.amazon.com/gp/product/B00SW0TY8O/">http://www.amazon.com/gp/product/B00SW0TY8O/</a></li>
-						<li><i>Cloudera engeneering blog</i> <a href="http://blog.cloudera.com/blog/category/spark/">http://blog.cloudera.com/blog/category/spark/</a></li>
-						<li><i>Databricks blog</i> <a href="https://databricks.com/blog">https://databricks.com/blog</a></li>
-					</ul>
-				</section>
+        <section>
+            <img src="img/Wordcount.png" style="max-width: 70%; border: none; box-shadow: none"/>
+        </section>
 
-			</div>
+        <section>
+            <h3>Архитектура</h3>
 
-		</div>
+            <img src="img/spark_architecture.svg" style="border: 0; width: 60%;"/>
+        </section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+        <section>
+            <h3>Загрузка и сохранение данных</h3>
 
-		<script>
+            <p>
+                Поддерживаются такие провайдеры:
+            </p>
+            <ul>
+                <li>LFS, NFS, HDFS, Amazon S3 в текстовом формате, JSON, CSV, Hadoop SequenceFiles, сериализованные
+                    java-объекты
+                </li>
+                <li>БД, поддерживаются Cassandra, HBase, Elasticsearch и любая JDBC-совместимая</li>
+                <li>Flume и Kafka для Spark Streaming</li>
+            </ul>
+        </section>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+        <section>
+            <h3>Основная структура данных – RDD*</h3>
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+            <p>
+                <small>*Resilient Distributet Dataset</small>
+            </p>
+        </section>
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
+        <section>
+            <h3>Операции с RDD</h3>
 
-		</script>
+            <ul>
+                <li>transformations - операции над RDD возвращают новый RDD</li>
+                <code>
+                    <ul>
+                        <li>map(...)</li>
+                        <li>filter(...)</li>
+                    </ul>
+                </code>
+                <li>actions - возвращают результат в основную програму</li>
+                <code>
+                    <ul>
+                        <li>count()</li>
+                        <li>first()</li>
+                    </ul>
+                </code>
+            </ul>
+        </section>
 
-	</body>
+        <section>
+            <section data-transition="fade">
+                <img src="img/rdd1.png">
+            </section>
+            <section data-transition="fade">
+                <img src="img/rdd2.png">
+            </section>
+            <section data-transition="fade">
+                <img src="img/rdd3.png">
+            </section>
+        </section>
+
+        <section>
+            <img src="img/rdd_transformations.png"/>
+        </section>
+
+        <!--<section>-->
+            <!--<code>-->
+            <!--<table style="font-size: 50%;">-->
+                <!--<tr>-->
+                    <!--<th>org.apache.spark.rdd.RDD[T]</th>-->
+                    <!--<th>scala.collection.immutable.Stream[T]</th>-->
+                    <!--<th>java.util.stream.Stream[T]</th>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>map(f: T => U): RDD[U]</td>-->
+                    <!--<td>map(f: T => U): Stream[U]</td>-->
+                    <!--<td>Stream&lt;R> map(Function&lt;T, R> mapper)</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>flatMap(f: T => TraversableOnce[U]): RDD[U]</td>-->
+                    <!--<td>flatMap(f: T => TrabersableOnce[U]): Stream[U]</td>-->
+                    <!--<td>Stream&lt;R> flatMap(Function&lt;T, Stream&lt;R>> mapper)</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>filter(f: T => Boolean): RDD[T]</td>-->
+                    <!--<td>filter(p: T => Boolean): Stream[T]</td>-->
+                    <!--<td>Stream&lt;T> filter(Predicate&lt;? super T> predicate)</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>++(other: RDD[T]): RDD[T]</td>-->
+                    <!--<td>++(that: TraversableOnce[T]): Stream[T]</td>-->
+                    <!--<td>static Stream&lt;T> concat(Stream&lt;T> a, Stream&lt;T> b)</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>sortBy(f: T => K): RDD[T]</td>-->
+                    <!--<td>sortBy[B](f: T => B): Stream[T]</td>-->
+                    <!--<td>Stream&lt;T> sorted(Comparator&lt;T> comparator)</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>groupBy[K](f: T => K): RDD[(K, Iterable[T])]</td>-->
+                    <!--<td>groupBy[K](f: A => K): Map[K, A]</td>-->
+                    <!--<td>collect(Collectors.toMap(Function&lt;T, K> keyMapper, Function&lt;T, U> valueMapper))</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>zip(other: RDD[U]): RDD[(T, U)]</td>-->
+                    <!--<td>zip(that: Iterable[U]): Stream[(T, V)]</td>-->
+                    <!--<td>-</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+            <!--</code>-->
+            <!--TODO: mk wider-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Трансформации</h3>-->
+
+            <!--<ul>-->
+                <!--<li>синтаксис похож на работу с коллекциями в Scala</li>-->
+                <!--<li>все операции lazy</li>-->
+                <!--<li>производятся только тогда, когда выполняется действие</li>-->
+                <!--<li>переиспользуемые данные можно заперсистить, вызвав метод .persist()</li>-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Действия</h3>-->
+
+            <!--<p>Операции, возвращающие данные в основную програму или записывающие данные во внешнее хранилище</p>-->
+        <!--</section>-->
+
+        <section>
+            <img src="img/rdd_actions.png"/>
+        </section>
+
+        <!--<section>-->
+            <!--<code>-->
+                <!--<table style="font-size: 50%;">-->
+                    <!--<tr>-->
+                        <!--<th>org.apache.spark.rdd.RDD[T]</th>-->
+                        <!--<th>scala.collection.immutable.Stream[T]</th>-->
+                        <!--<th>java.util.stream.Stream[T]</th>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>take(n: Int): Array[T]</td>-->
+                        <!--<td>take(n: Int).toSeq(): Seq[T]</td>-->
+                        <!--<td>List&lt;T> limit(n: Int).collect(Collectors.toList())</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>foreach(f: T => Unit)</td>-->
+                        <!--<td>foreach(f: T => Unit)</td>-->
+                        <!--<td>void forEach(Consumer&lt;T> action)</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>collect(): Array[T]</td>-->
+                        <!--<td>toSeq(): Seq[T]</td>-->
+                        <!--<td>List&lt;T> collect(Collectors.toList())</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>reduce(f: (T, T) => T): RDD[T]</td>-->
+                        <!--<td>reduceLeft(f: (T, T) => T): T</td>-->
+                        <!--<td>Optional&lt;T> reduce(BinaryOperator&lt;T> accumulator)</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>fold(zeroValue: T)(op: (T, T) => T): T</td>-->
+                        <!--<td>foldLeft[U](z: U)(op: (T, U) => U): U</td>-->
+                        <!--<td>-</td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+            <!--</code>-->
+        <!--</section>-->
+
+        <section>
+            <img src="img/logs_example.png"/>
+        </section>
+
+        <section data-background-transition="none">
+            <section data-transition="fade"><img src="img/rdd_lifecycle_1.png"></section>
+            <section data-transition="fade"><img src="img/rdd_lifecycle_2.png"></section>
+            <section data-transition="fade"><img src="img/rdd_lifecycle_3.png"></section>
+            <section data-transition="fade"><img src="img/rdd_lifecycle_4.png"></section>
+            <section data-transition="fade"><img src="img/rdd_lifecycle_5.png"></section>
+            <section data-transition="fade"><img src="img/rdd_lifecycle_6.png"></section>
+            <section data-transition="fade"><img src="img/rdd_lifecycle_7.png"></section>
+        </section>
+
+        <section>
+            <section>
+                <h3>Жизненный цикл job'ов</h3>
+                <img src="img/arrow_down.png" style="border: 0; box-shadow: none"/>
+            </section>
+            <section>
+                <img src="img/job_hadoop.png" style="max-width: 60%"/>
+                <p>Hadoop MR</p>
+            </section>
+            <section>
+                <img src="img/job_spark.png" style="max-width: 60%"/>
+                <p>Spark</p>
+            </section>
+        </section>
+
+        <section>
+            <h3>Spark Streaming</h3>
+
+            <p>Если нужно анализировать не только собранные данные, но и потоки c новыми данными в реалтайме.</p>
+
+            <img src="img/streaming.png"/>
+
+            <p>Можно подключиться к HDFS, Flume, Kafka</p>
+        </section>
+
+        <section>
+            <h3>Spark SQL</h3>
+
+            <p>Можно выполнять SQL-запросы к данным Apache Hive, пишут что up to x100 раз быстрее чем Hive</p>
+            
+            <img src="img/sql.png">
+        </section>
+
+        <section>
+            <h3>GraphX</h3>
+
+            <p>Работа с графами</p>
+        </section>
+
+        <section>
+
+        </section>
+
+        <section>
+            <h2>Dig into</h2>
+            <ul>
+                <li><i>Berkley Big Data mini-course</i>
+                    <a href="http://ampcamp.berkeley.edu/big-data-mini-course/index.html">http://ampcamp.berkeley.edu/big-data-mini-course/index.html</a></li>
+                <li>
+                    <i>Learning Spark: Lightning-Fast Big Data Analysis</i>
+                    <a href="http://www.amazon.com/gp/product/B00SW0TY8O/">http://www.amazon.com/gp/product/B00SW0TY8O/</a>
+                </li>
+                <li>
+                    <i>Cloudera engeneering blog</i>
+                    <a href="http://blog.cloudera.com/blog/category/spark/">http://blog.cloudera.com/blog/category/spark/</a>
+                </li>
+                <li>
+                    <i>Databricks blog</i>
+                    <a href="https://databricks.com/blog">https://databricks.com/blog</a>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <img src="img/demo.jpg"/>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
 </html>
